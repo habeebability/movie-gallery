@@ -5,7 +5,6 @@ const createAutoComplete = ({
   inputValue,
   fetchData
 }) => {
-  
   root.innerHTML = `
   <label><b>Search</b></label>
   <input class="input"/>

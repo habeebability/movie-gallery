@@ -67,7 +67,24 @@ const onMovieSelect = async (movie, summaryElement, side) => {
 
 
 const runComparison = () => {
-  console.log('time to compare');
+  const leftSideStats = document.querySelectorAll('#left-summary .notification');
+  const rightSideStats = document.querySelectorAll('#right-summary .notification');
+
+  leftSideStats.forEach((leftStat, index) =>{
+    const rightStat = rightSideStats[index];
+
+    const leftSideValue = leftStat.dataset.value;
+    const rightSideValue = rightStat.dataset.value;
+
+    if (rightSideValue > leftSideValue) {
+      leftStat.classList.remove('is-primary');
+      leftStat.classList.add('is-warning');
+    } else {
+      rightStat.classList.remove('is-primary');
+      rightStat.classList.add('is-primary');
+    }
+  })
+
 }
 const movieTemplate = (movieDetail) => {
   const dollars = parseInt(movieDetail.BoxOffice.replace(/\$/g, '').replace(/,/g, ''));
@@ -107,15 +124,15 @@ const movieTemplate = (movieDetail) => {
       <p class="title">${movieDetail.BoxOffice}</p>
       <p class="subtitle">Box Office</p>
     </article>
-    <article  class="notification is-primary">
+    <article data-value=${metascore} class="notification is-primary">
       <p class="title">${movieDetail.Metascore}</p>
       <p class="subtitle">Meta Score</p>
     </article>
-    <article class="notification is-primary">
+    <article data-value=${imdbRating} class="notification is-primary">
       <p class="title">${movieDetail.imdbRating}</p>
       <p class="subtitle">IMDB Rating</p>
     </article>
-    <article class="notification is-primary">
+    <article data-value=${imdbVotes} class="notification is-primary">
       <p class="title">${movieDetail.imdbVotes}</p>
       <p class="subtitle">IMDB VOTES</p>
     </article>
